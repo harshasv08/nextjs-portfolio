@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+    --primary: 30 41 59;
+    --accent: 34 197 94;
+  }
+
+  /* Light mode variables */
+  .light {
+    --background: 255 255 255;
+    --foreground: 31 41 55;
+  }
+
+  body {
+    @apply bg-background text-text;
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Light mode body styles */
+  .light body {
+    background-color: #FFFFFF;
+    color: #1F2937;
+  }
+  
+  /* Light mode component backgrounds */
+  .light .bg-primary {
+    background-color: #F3F4F6;
+  }
+  
+  .light .bg-background-light {
+    background-color: #F9FAFB;
+  }
+  
+  .light .text-text {
+    color: #1F2937;
+  }
+  
+  .light .text-text-muted {
+    color: #6B7280;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Layout */
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Surfaces */
+  .surface-glass {
+    @apply border border-primary-light/40 bg-background/40 backdrop-blur-xl;
+  }
+  .card {
+    @apply rounded-2xl border border-primary-light/40 bg-primary/80 shadow-[0_10px_30px_rgba(0,0,0,0.20)];
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(34,197,94,0.14)] cursor-pointer;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+  .btn-primary {
+    @apply bg-accent text-background hover:bg-accent-hover;
+  }
+  .btn-secondary {
+    @apply border-2 border-accent/70 text-accent hover:bg-accent/10;
+  }
+  .icon-btn {
+    @apply inline-flex items-center justify-center rounded-xl border border-primary-light/40 bg-primary/60 px-3 py-3 transition-colors duration-200 hover:bg-primary;
+  }
+
+  /* Chips */
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary-light/40 bg-background-light/40 px-3 py-1 text-xs text-text-muted;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-light rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
