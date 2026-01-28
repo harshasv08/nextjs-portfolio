@@ -89,7 +89,7 @@ export default function Contact() {
 
               <div className="flex gap-4">
                 <motion.a
-                  href="https://www.linkedin.com/in/harsha-s-v-0846a616b/"
+                  href="https://www.linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="icon-btn flex-1 cursor-pointer"
@@ -99,7 +99,7 @@ export default function Contact() {
                   <Linkedin className="w-6 h-6" />
                 </motion.a>
                 <motion.a
-                  href="https://github.com/harshasv08?tab=repositories"
+                  href="https://github.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="icon-btn flex-1 cursor-pointer"
