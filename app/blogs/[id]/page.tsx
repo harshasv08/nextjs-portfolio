@@ -71,7 +71,7 @@ export default function BlogDetailPage() {
     <main className="min-h-screen bg-background pt-24">
       {/* Header */}
       <div className="fixed inset-x-0 top-4 z-40">
-        <div className="container-page max-w-4xl">
+        <div className="container-page max-w-7xl">
           <div className="surface-glass rounded-2xl px-4 py-3 flex items-center justify-between">
             <Link href="/blogs">
               <motion.button
@@ -92,7 +92,7 @@ export default function BlogDetailPage() {
       </div>
 
       {/* Blog Content */}
-      <article className="container-page max-w-4xl py-12">
+      <article className="container-page max-w-7xl py-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
