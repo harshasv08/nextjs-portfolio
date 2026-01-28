@@ -6,10 +6,10 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 interface Blog {
-  id: number
+  id?: number
   title: string
   excerpt: string
-  content: string
+  content?: string
   category: string
   image: string
   date: string
@@ -45,7 +45,7 @@ export default function BlogsPage() {
   }
 
   // Fallback data if API fails
-  const fallbackBlogs = [
+  const fallbackBlogs: Blog[] = [
   {
     title: 'Building Scalable AI Workflows with LangGraph',
     excerpt: 'Learn how to design and implement intelligent AI workflows using LangGraph for document processing, semantic search, and knowledge retrieval systems. This comprehensive guide covers architecture patterns, best practices, and real-world examples.',

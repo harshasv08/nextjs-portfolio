@@ -64,7 +64,7 @@ export default function Contact() {
           >
             <div>
               <h3 className="text-2xl font-heading font-bold mb-6 text-accent">
-                Let's Connect
+                Let’s Connect
               </h3>
               <p className="text-text-muted mb-8">
                 Feel free to reach out if you’re looking for a developer, have a
