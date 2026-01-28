@@ -19,6 +19,8 @@ interface Blog {
 export default function BlogsPage() {
   const [allBlogs, setAllBlogs] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const pageSize = 4
 
   useEffect(() => {
     fetchBlogs()
@@ -112,6 +114,20 @@ export default function BlogsPage() {
   },
   ]
 
+  const sourceBlogs = (allBlogs.length > 0 ? allBlogs : fallbackBlogs)
+  const totalPages = Math.max(1, Math.ceil(sourceBlogs.length / pageSize))
+  const safePage = Math.min(page, totalPages)
+  const startIdx = (safePage - 1) * pageSize
+  const pageItems = sourceBlogs.slice(startIdx, startIdx + pageSize)
+
+  const goToPage = (nextPage: number) => {
+    const clamped = Math.min(Math.max(1, nextPage), totalPages)
+    setPage(clamped)
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   return (
     <main className="min-h-screen bg-background pt-24">
       {/* Header with Back Button */}
@@ -142,7 +158,7 @@ export default function BlogsPage() {
       </div>
 
       {/* Page Content */}
-      <div className="container-page max-w-4xl py-12">
+      <div className="container-page max-w-7xl py-12">
         {/* Page Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -160,8 +176,8 @@ export default function BlogsPage() {
         </motion.div>
 
         {/* Vertical Blog Cards */}
-        <div className="space-y-8">
-          {(allBlogs.length > 0 ? allBlogs : fallbackBlogs).map((blog, index) => (
+        <div className="space-y-10">
+          {pageItems.map((blog, index) => (
             <motion.article
               key={blog.id || `fallback-${index}`}
               initial={{ opacity: 0, y: 30 }}
@@ -172,7 +188,7 @@ export default function BlogsPage() {
             >
               <div className="flex flex-col md:flex-row">
                 {/* Blog Image/Icon - Vertical Layout */}
-                <div className="w-full md:w-56 h-48 md:h-auto bg-gradient-to-br from-accent/18 to-accent/5 flex items-center justify-center text-6xl group-hover:scale-[1.02] transition-transform duration-300 flex-shrink-0 border-b md:border-b-0 md:border-r border-primary-light/40">
+                <div className="w-full md:w-80 h-56 md:h-auto bg-gradient-to-br from-accent/18 to-accent/5 flex items-center justify-center text-6xl group-hover:scale-[1.02] transition-transform duration-300 flex-shrink-0 border-b md:border-b-0 md:border-r border-primary-light/40">
                   {blog.image}
                 </div>
 
@@ -232,6 +248,49 @@ export default function BlogsPage() {
               </div>
             </motion.article>
           ))}
+        </div>
+
+        {/* Pagination */}
+        <div className="mt-10 flex items-center justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => goToPage(safePage - 1)}
+            disabled={safePage <= 1}
+            className="icon-btn disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2"
+            aria-label="Previous page"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </button>
+
+          <div className="flex items-center gap-2">
+            {Array.from({ length: totalPages }).slice(0, 7).map((_, i) => {
+              const p = i + 1
+              const active = p === safePage
+              return (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => goToPage(p)}
+                  className={`min-w-[44px] rounded-xl border border-primary-light/40 px-3 py-2 text-sm transition-colors ${
+                    active ? 'bg-accent text-background' : 'bg-primary/50 text-text hover:bg-primary'
+                  }`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {p}
+                </button>
+              )
+            })}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => goToPage(safePage + 1)}
+            disabled={safePage >= totalPages}
+            className="icon-btn disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2"
+            aria-label="Next page"
+          >
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Back to Home Button at Bottom */}

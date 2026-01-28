@@ -72,20 +72,20 @@ export default function Hero() {
               4+ years experience
             </span>
           </motion.div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-4 tracking-tight">
+          <h1 className="font-heading font-bold mb-4 tracking-tight whitespace-nowrap text-[clamp(2.6rem,6vw,5.75rem)] leading-[1.02]">
             <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="block text-text"
+              className="text-text"
             >
               Hi, I’m{' '}
             </motion.span>
             <motion.span
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="block text-accent"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.6 }}
+              className="text-accent"
             >
               Harsha
             </motion.span>
