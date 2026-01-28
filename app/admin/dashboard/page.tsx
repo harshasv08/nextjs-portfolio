@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { Plus, Edit, Trash2, LogOut, BookOpen, Calendar, Clock } from 'lucide-react'
@@ -34,12 +34,7 @@ export default function AdminDashboard() {
   })
   const router = useRouter()
 
-  useEffect(() => {
-    fetchBlogs()
-    verifyAuth()
-  }, [])
-
-  const verifyAuth = async () => {
+  const verifyAuth = useCallback(async () => {
     try {
       const token = document.cookie
         .split('; ')
@@ -63,9 +58,9 @@ export default function AdminDashboard() {
     } catch (error) {
       router.push('/admin/login')
     }
-  }
+  }, [router])
 
-  const fetchBlogs = async () => {
+  const fetchBlogs = useCallback(async () => {
     try {
       const token = document.cookie
         .split('; ')
@@ -85,7 +80,12 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    fetchBlogs()
+    verifyAuth()
+  }, [fetchBlogs, verifyAuth])
 
   const handleLogout = () => {
     document.cookie = 'auth-token=; path=/; max-age=0'

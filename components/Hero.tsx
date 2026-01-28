@@ -79,7 +79,7 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="block text-text"
             >
-              Hi, I'm{' '}
+              Hi, I’m{' '}
             </motion.span>
             <motion.span
               initial={{ opacity: 0, x: 20 }}

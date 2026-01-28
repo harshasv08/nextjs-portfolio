@@ -48,7 +48,7 @@ export default function Contact() {
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-8" />
           <p className="text-text-muted text-lg max-w-2xl mx-auto">
-            I'm always open to discussing new projects, creative ideas, or opportunities
+            I’m always open to discussing new projects, creative ideas, or opportunities
             to be part of your visions.
           </p>
         </motion.div>
@@ -67,7 +67,7 @@ export default function Contact() {
                 Let's Connect
               </h3>
               <p className="text-text-muted mb-8">
-                Feel free to reach out if you're looking for a developer, have a
+                Feel free to reach out if you’re looking for a developer, have a
                 question, or just want to connect.
               </p>
             </div>

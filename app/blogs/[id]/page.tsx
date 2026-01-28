@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowLeft, BookOpen } from 'lucide-react'
 import Link from 'next/link'
@@ -22,13 +22,7 @@ export default function BlogDetailPage() {
   const [blog, setBlog] = useState<Blog | null>(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    if (params.id) {
-      fetchBlog()
-    }
-  }, [params.id])
-
-  const fetchBlog = async () => {
+  const fetchBlog = useCallback(async () => {
     try {
       const response = await fetch(`/api/blogs/${params.id}`)
       const data = await response.json()
@@ -38,7 +32,13 @@ export default function BlogDetailPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params.id])
+
+  useEffect(() => {
+    if (params.id) {
+      fetchBlog()
+    }
+  }, [params.id, fetchBlog])
 
   if (loading) {
     return (
